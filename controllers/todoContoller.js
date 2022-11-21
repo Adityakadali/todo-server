@@ -4,13 +4,29 @@ const { TodoModel } = require("../models/todo");
 // Adds todo Entry to DB
 const addTodo = async (req, res) => {
   const { title, task } = req.body;
-  const todo = new TodoModel({
-    title: title,
-    tasks: [task],
-  });
-  await todo.save();
+  if (!title) {
+    return res.status(401).json({
+      staus: "401",
+      message: "Title cannot be empty",
+    });
+  }
+  try {
+    const todo = new TodoModel({
+      title: title,
+    });
 
-  res.status(200).json(todo);
+    if (task) {
+      await todo.tasks.push(task);
+    }
+    await todo.save();
+    res.status(200).json(todo);
+  } catch (error) {
+    res.status(503).json({
+      status: "503",
+      message: "Internal server error",
+      erorr: error,
+    });
+  }
 };
 
 // Method GET
