@@ -1,5 +1,19 @@
 const { TodoModel } = require("../models/todo");
 
+// Method GET
+// Fetches all Todos in DB
+const getTodos = async (req, res) => {
+  try {
+    const todos = await TodoModel.find();
+    res.status(200).json(todos);
+  } catch (error) {
+    res.status(503).json({
+      status: 500,
+      message: "Internal server error",
+    });
+  }
+};
+
 // Method POST
 // Adds todo Entry to DB
 const addTodo = async (req, res) => {
@@ -30,26 +44,14 @@ const addTodo = async (req, res) => {
 };
 
 // Method GET
-// Fetches all Todos in DB
-const getTodos = async (req, res) => {
-  const todos = await TodoModel.find();
-  res.status(200).json(todos);
-};
-
-// Method Get
-// Fetched model by id
-const getTodo = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const todo = await TodoModel.findById(id);
-    res.status(200).json(todo);
-  } catch (error) {
-    res.status(400).send("id not found");
-  }
-};
-
+// Deletes todo
+// From body => id
 const deleteTodo = async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.body;
+  } catch (error) {
+    return res.status(400).json("require id to delete object");
+  }
   try {
     const todo = await TodoModel.findByIdAndDelete(id);
     res.status(200).json(todo);
@@ -58,29 +60,8 @@ const deleteTodo = async (req, res) => {
   }
 };
 
-const createTask = async (req, res) => {
-  const { id } = req.params;
-  const { task } = req.body;
-  const todo = await TodoModel.findById(id);
-  todo.tasks.push(task);
-  await todo.save();
-  res.status(200).json(todo);
-};
-
-const deleteTask = async (req, res) => {
-  const { id } = req.params;
-  const { key } = req.body;
-  const todo = await TodoModel.findById(id);
-  todo.tasks.splice(key, 1);
-  todo.save();
-  res.status(200).json(todo);
-};
-
 module.exports = {
   getTodos,
   addTodo,
-  getTodo,
   deleteTodo,
-  createTask,
-  deleteTask,
 };
