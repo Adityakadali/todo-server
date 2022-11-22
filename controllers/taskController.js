@@ -14,7 +14,7 @@ const createTask = async (req, res) => {
   const todo = await TodoModel.findById(id).exec();
 
   if (!todo) {
-    res.status(404).json({
+    return res.status(404).json({
       status: 404,
       message: "Invalid id",
     });
@@ -30,7 +30,7 @@ const deleteTask = async (req, res) => {
   const todo = await TodoModel.findById(id).exec();
 
   if (!todo) {
-    res.status(404).json({
+    return res.status(404).json({
       status: 404,
       message: "Invalid id",
     });
@@ -46,7 +46,7 @@ const edittask = async (req, res) => {
   const todo = await TodoModel.findById(id).exec();
 
   if (!todo) {
-    res.status(404).json({
+    return res.status(404).json({
       status: 404,
       message: "Invalid id",
     });

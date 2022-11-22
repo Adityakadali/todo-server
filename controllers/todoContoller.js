@@ -47,21 +47,39 @@ const addTodo = async (req, res) => {
 // Deletes todo
 // From body => id
 const deleteTodo = async (req, res) => {
-  try {
-    const { id } = req.body;
-  } catch (error) {
-    return res.status(400).json("require id to delete object");
+  const { id } = req.body;
+  const todo = await TodoModel.findByIdAndDelete(id).exec();
+  if (!todo) {
+    return res.status(404).json({
+      status: 404,
+      message: "Invalid id",
+    });
   }
-  try {
-    const todo = await TodoModel.findByIdAndDelete(id);
-    res.status(200).json(todo);
-  } catch (err) {
-    res.status(400).send("ID not found");
+  res.status(200).json({
+    status: 200,
+    message: "Deleted",
+    todo: todo,
+  });
+};
+
+const editTodo = async (req, res) => {
+  const { id, newTitle } = req.body;
+  const todo = await TodoModel.findById(id).exec();
+  if (!todo) {
+    return res.status(404).json({
+      status: 404,
+      message: "Invalid id",
+    });
   }
+
+  todo.title = newTitle;
+  await todo.save();
+  res.status(200).json(todo);
 };
 
 module.exports = {
   getTodos,
   addTodo,
   deleteTodo,
+  editTodo,
 };
