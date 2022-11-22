@@ -20,4 +20,11 @@ MONGO_URL = mongodb://localhost:27017/todo
 
 ## API Collection
 
-- [![](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](./postman-api-collection.json)
+[![](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](./postman-api-collection.json)
+
+## Made by
+
+- Aditya Kadali
+
+[![](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/adityakadali)
+[![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aditya-kadali/)
