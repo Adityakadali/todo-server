@@ -10,6 +10,15 @@
       "item": [
         {
           "name": "getTodos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "protocolProfileBehavior": {
             "disableBodyPruning": true
           },
@@ -209,6 +218,33 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "search",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "query",
+              "value": "wednesday",
+              "type": "default"
+            }
+          ]
+        },
+        "url": {
+          "raw": "localhost:4000/search",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["search"]
+        }
+      },
+      "response": []
     }
   ]
 }

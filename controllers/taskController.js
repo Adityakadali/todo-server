@@ -4,7 +4,7 @@ const { TodoModel } = require("../models/todo");
 
 const createTask = async (req, res) => {
   const { id, task } = req.body;
-  if (id || task) {
+  if (!(id || task)) {
     return res.status(400).json({
       status: 400,
       message: "Task cannot be empty",

@@ -10,6 +10,7 @@
 
 - `/todo`
 - `/task`
+- `/search`
 
 ## sample env
 
