@@ -7,7 +7,7 @@ const { search } = require("./routes/searchRoute");
 require("./config/database").connectDB(); //Connecting Database
 
 const app = express();
-
+app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // URL Encoding option
 
 app.use("/todo", todo);
