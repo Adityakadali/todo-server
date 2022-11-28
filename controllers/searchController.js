@@ -4,7 +4,7 @@ const searchControl = async (req, res) => {
   try {
     const { query } = req.body;
     const s = await TodoModel.aggregate().search({
-      index: "todo",
+      index: "default",
       text: {
         query: query,
         path: ["title", "tasks"],
